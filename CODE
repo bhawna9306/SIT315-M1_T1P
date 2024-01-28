@@ -1,0 +1,28 @@
+const int pirSensorPin = 2;  // Digital input pin for PIR sensor
+const int ledPin = 13;       // Digital output pin for LED
+
+int motionFlag = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pirSensorPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  int motionValue = digitalRead(pirSensorPin);
+
+  if (motionValue == HIGH) {
+    motionFlag = 1;
+    digitalWrite(ledPin, HIGH);  // Turn on LED
+  } else {
+    motionFlag = 0;
+    digitalWrite(ledPin, LOW);  // Turn off LED
+  }
+
+  // Print data to Serial monitor
+  Serial.print("Motion Flag: ");
+  Serial.println(motionFlag);
+
+  delay(1000);  // Delay for stability
+}
